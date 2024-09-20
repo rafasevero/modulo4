@@ -1,0 +1,287 @@
+SQL
+
+ - A SQL é uma linguagem de banco de dados;
+ - É um acrônimo de Structured Query Language(linguagem estruturada de consulta);
+ - É a linguagem para os bancos de dados relacionais(MySQL, PostgreSQL, SQL Server);
+ - Trabalhamos com ela criando Queries (INSERT, UPDATE,SELECT);
+ - Com esta linguagem podemos criar e manipular DBs;
+
+
+SQL X MySQL
+
+ - SQL é a linguagem e MySQL é o SGBD;
+ - SGBD é um acrônimo de Sistema Gerenciador de Banco de Dados;
+ 
+
+PRINCIPAIS ELEMENTOS DE UM BD
+
+ -DIAGRAMA DE BANCO: é o projeto do banco, parte fundamental e mais avançada, que define o sucesso do projeto;
+ -BANCO DE DADOS: a entidade que vai guardar todos os elementos do banco;
+ -TABELAS: a categoria dos dados;
+ -DADOS: o dado final entregue pelo usuário; 
+
+
+O QUE É IMPORTAÇÃO DE BANCO?
+
+ - Importação de banco é quando temos um arquivo pronto de banco(com tabelas e dados) e inserimos ele no nosso SGBD;
+ - Geralmente originado de uma exportação;
+ - Ação simples para obter todos os dados já cadastrados em um sistema;
+ - Após a importação podemos utilizar como se o banco houvesse sido criado na nossa máquina;
+ - É uma prática comum no dia a dia em uma empresa;
+
+SELECT * FROM <nome da tabela>
+
+
+VERIFICANDO BANCOS DE DADOS
+
+ - para garantir que um banco foi criado podemos utilizar um comando utilitário;
+ - SHOW DATABASES;
+ - todos os bancos que possuímos no SGBD serão exibidos;
+ 
+
+REMOVENDO BANCO DE DADOS
+ - DROP DATABASE <nome>;
+
+
+EXPORTAR BANCOS
+ - comando:
+  - mysqldump -u root <nome_banco> > <nome_arquivo>.sql 
+
+
+UTILIZANDO BANCO DE DADOS
+
+ - para qualquer ação que envolva um determinado banco, precisamos utilizar ele;
+ - o comando é:  USE<nome>;
+ - agora os comandos serão direcionados a este banco;
+ - podemos então criar tabelas nele;
+
+
+TABELAS
+ - é a entidade responsável por guardar nossos dados;
+ - uma tabela possui colunas;
+ - as colunas sã como categorias dos nossos dados: nome, profissão, idade;
+ - as colunas possuem tipos de dados determinados, como: textos, números, datas e etc;
+ - e atributos(constraints): não nulo, chave primária, auto incremento e etc;
+
+ - CREATE TABLE <nome> (<coluna> <tipo de dado>)
+ - CHAR = aceita strings tbm, porém menores
+ - MEDIUMTEXT = aceita bites, não aceita caracteres, aceita um quantidade x de bites de uma string
+ - DROP TABLE <nome>;
+
+
+TIPOS DE DADOS
+ 
+ - os tipos de dados classificam um dado e os inserimos em uma coluna;
+ - é uma parte extremamente importante da criação do nosso projeto e banco de dados;
+ - alguns dados permitem limites serem definidos, como quantidade máxima de caracteres;
+ - são divididos em : texto, numérico , data e espacial;
+
+TIPOS DE TEXTO
+ - CHAR(x): aceita textos com 0 a 255 caracteres;
+ - VARCHAR(x): aceita textos com 0 a 65535 caracteres;
+ - Onde x é a quantidade máxima;
+ - TINYTEXT: apenas texto com até 255 caracteres;
+ - MEDIUMTEXT: apenas texto com até 16777215 caracteres;
+ - OBS: CHAR e VARCHAR aceitam números e caracteres especiais;
+
+ATRIBUTO
+
+ - NOT NULL: preenchimento obrigatório;
+ - UNIQUE: chave candidata
+
+
+INSERIR DADOS
+ 
+ - INSERT INTO <tabela> (<colunas..>)VALUES(<valores..<)
+
+
+TIPOS NUMÉRICOS
+
+ - BIT(x): 1 a 64 caracteres;
+ - TINYINT(x): 1 a 255 caracteres;
+ - BOOL: 0 é falso e outros valores são verdadeiros;
+ - INT(x): valores entre -2147483648 a 2147483647;
+
+
+TIPOS DE DATA
+
+ -DATE: aceita uma data no formato YYYY-MM-DD;
+ -DATETIME: aceita uma data com horário no formato YYYY-MM-DD hh:mm:ss;
+ -TIMESTAMP: aceita uma data no formato DATETIME, porém apenas entre os anos 1970 a 2038;
+ - as datas são inseridas entre aspas;
+
+ALTERANDO TABELAS
+
+  - há 3 tipos de alterações em SQL:
+  - adição de colunas = ALTER TABLE <tabela> ADD COLUMN <nome> <tipo>;
+  - remoção de colunas = ALTER TABLE <tabela> DROP COLUMN <nome>;
+  - modificar tipo da coluna; = ALTER TABLE <tabela> MODIFY COLUMN <coluna> <tipo>;
+
+COMANDOS CRUD  (create,read,update,delete)
+ - CREATE: criar/inserir dados(insert);
+ - READ: ler dados(select);
+ - UPDATE: atualizar dados(update);
+ - DELETE: deletar/remover dados(delete);
+
+
+SELECT 
+
+ - selecionar colunas específicas: 
+ - SELECT coluna1, coluna2 FROM <tabela>;
+ - desta maneira, cria-se um filtro;
+
+WHERE 
+ 
+ - o HHERE é uma cláusula de algumas queries, que determina quais registros vamos atualizar;
+ - EX: SELECT * FROM <tabela> WHERE <condição>;
+
+UPDATE
+ 
+ - UPDATE tabela SET <coluna=valor> WHERE condicao
+
+DELETE
+
+ - DELETE FROM <tabela> WHERE <condicao>
+
+
+SELECT
+
+ - a maioria das queries em um banco de dados são de consulta;
+ - comando com + variações;
+
+
+OPERADORES
+
+ - COMPARAÇÃO:(>,<,>=,<=,=);
+ - BETWEEN: seleção entre um intervalo;
+ - LIKE: seleção por meio de algum padrão;
+ - IN: seleção entre um conjunto de valores específicos;
+
+
+DISTINCT
+
+ - DISTINCT vai selecionar apenas as variações de valores;
+ - por exemplo: temos 10 cidades diferentes de usuários no sistema, só receberemos 10 resultados;
+ - SELECT DISTINCT <coluna> FROM <tabela>
+ - volta apenas os valores diferentes da coluna selecionada;
+
+OPERADORES LÓGICOS:
+
+ - AND = AND
+ - OR  = ||;
+ - NOT = NOT (filtro para tirar tal condição após o not);
+
+
+ORDER BY:
+
+ - ORDER BY é uma instrução para ordenação de resultados;
+ - podemos utilizar de forma ascendente(ASC) e descendente(DESC);
+ - utilizamos após o WHERE,se tiver;
+
+LIMIT: 
+
+ - a instrução LIMIT é outra forma de limitar os resultados e tornar a consulta mais rápida;
+ - podemos especificar o número de resultados retornados;
+ - LIMIT 15;
+ - apenas os 15 primeiros resultados serão exibidos;
+ - podemos unir com WHERE e outras instruções;
+
+
+FUNÇÕES NO SQL: 
+
+ - função MAX: retorna o maior valor, de uma determinada coluna;
+   - EX: SELECT MAX(<coluna>)FROM <tabela>;
+ - algo que poderia ser atingido por:   SELECT coluna FROM tabela ORDER BY coluna DESC LIMIT 1;
+
+ - função MIN vai retornar o menor valor de uma coluna específica;
+   - EX: SELECT MIN(<coluna>)FROM <tabela>;
+
+ - função COUNT: retorna o número de valores que combinam algum critério;
+   - EX:SELECT COUNT(*)FROM salaries WHERE salary > 100000; 
+
+ - função AVG: retorna a média de uma determinada coluna;
+ - AVG vem de average (média);
+   - EX: SELECT AVG(<coluna>)FROM <tabela>;
+
+ - função SUM: retorna a soma de todos os valores de uma coluna;
+   - EX: SELECT SUM(<coluna>)FROM <tabela>     
+
+
+OPERADOR LIKE:
+
+ - O LIKE é utilizado sempre em conjunto do WHERE;
+ - ele tem a premissa de filtrar ainda mais nossos resultados;
+ - utilizamos também o coringa %, que ajuda muito nas buscas;
+   - EX: SELECT * FROM employees WHERE first_name LIKE '%ber%';
+   - desta forma, teremos a seleção de todos os nomes que contém ber, não importa se no fim ou começo;
+
+OPERADOR IN:
+
+ - IN(especifico): vai fazer uma busca por um conjunto de valores, ajuda a filtrar os resultados de uma consulta ao permitir a especificação de diversos valores possíveis para um determinado campo;
+   -EX: SELECT * FROM <tabela> WHERE <coluna> IN ('1','2','3');
+   - desta forma, selecionamos os registros 1,2,3 de certa coluna;
+
+OPERADOR BETWEEN:
+ - O BETWEEN(amplo) é parecido com o IN, mas ele vai receber uma faixa de valores;
+ - o resultado será retornado baseado nos registros dentro da faixa;
+   - EX: SELECT * FROM <tabela> WHERE <coluna> BETWEEN 'comecoFaixa' AND 'fimFaixa';     
+
+CRIANDO ALIAS:
+
+ - o ALIAS pode servir para renomear uma coluna com nome não objetivo ou colunas originadas de função;
+   - EX: SELECT SUM(<coluna>) AS soma_coluna FROM <tabela>;
+   - deste modo, a soma das colunas tem o nome de soma_coluna, o que deixa mais objetivo;
+ - O AS é utilizado para determinar como a coluna deve se chamar;   
+
+
+CONSTRAINTS: 
+ - São propriedades ou características especiais que são colocadas em colunas para ter um comportamento específico
+ - são regras que determinam comos os campos serão preenchidos;
+ - por exemplo: NOT NULL = o campo não pode ser nulo;
+ - As constraints são add na criação da tabela geralmente, porém podemos alterar tabelas para adicioná-las;
+ - estas regras são de grande utilidade pois ajudam a organizar e padronizar nosso projeto
+
+UNIQUE:
+
+ - Garante que todos os valores em uma coluna serão diferentes;
+ - um caso de uso é email, não queremos emails duplicados na nossa base;
+ - desta maneira, recebemos um erro caso o dado já tenha sido inserido;
+
+PRIMARY KEY:
+
+ - só pode ser add em uma única coluna da tabela, geralmente é o ID;
+ - o valor deve ser único e não pode ser nulo;  
+
+AUTO_INCREMENT: 
+
+ - serve para add a quantidade de um em todo registro adicionado;
+ - é muito usada na coluna id, já que ela é única e também chave primária;;
+
+FOREIGN KEY: 
+
+ - é uma ligação de uma tabela a outra;
+ - FOREIGN KEY(codOutratabela) references <nometabela>(idDatabela);
+
+INDEX
+
+ - add um índice a uma coluna faz a consulta que envolva a mesma se tornar mais rápida;
+ - sem o índice a consulta começa da primeira a última coluna até encontrar que você precisa,com o  índice as demais serão ignoradas;
+ - as consultas que são melhoradas pelo INDEX são as com WHERE
+   - EX: CREATE INDEX index_nome ON <tabela>(<coluna>);
+ - sua função é acelerar o tempo de acesso às linhas de uma tabela, criando ponteiros para os dados armazenados em colunas específicas;  
+
+ //perguntar sobre index, in
+
+REMOVENDO INDEX 
+
+ - DROP INDEX <nome> ON <tabela>
+
+
+JOIN
+
+ - são consultas que envolvem duas ou mais tabelas;
+ - as tabelas geralmente possuem relação entre si;
+ - temos então uma consulta mais complexa e com mais dados;
+ - há três tipos mais utilizados de JOIN:
+   - LEFT e RIGHT JOIN;
+   - INNER JOIN;

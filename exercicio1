@@ -1,0 +1,147 @@
+create database exercicio1;
+
+create table departamento(
+	codDepartamento integer auto_increment primary key,
+    nome varchar(40) unique not null,
+    descricaoFuncional varchar(80) null,
+    localizacao text
+);
+
+create table estado(
+	siglaEstado char(2) primary key,
+    nome varchar(30) unique not null
+);
+
+CREATE TABLE cidade(
+	codCidade INTEGER AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(50) UNIQUE NOT NULL,
+    siglaEstado char(2) NOT NULL,
+    FOREIGN KEY(siglaEstado) REFERENCES estado(siglaEstado)
+);
+
+CREATE TABLE vendedor(
+	codVendedor INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(60) NOT NULL,
+    dataNascimento DATE,
+    endereco VARCHAR(60),
+    cep CHAR(8),
+    telefone VARCHAR(20),
+    codCidade INT,
+    dataContratacao DATE DEFAULT(CURRENT_DATE()),
+    codDepartamento INT,
+    FOREIGN KEY (codCidade) REFERENCES cidade(codCidade),
+    FOREIGN KEY (codDepartamento) REFERENCES departamento(codDepartamento)
+
+);
+
+
+CREATE TABLE cliente (
+	codCliente INT PRIMARY KEY AUTO_INCREMENT,
+    endereco VARCHAR(60),
+    codCidade INT NOT NULL,
+    telefone VARCHAR(20),
+    tipo CHAR(1) CHECK (tipo in ('F', 'J')),
+    dataCadastro DATE DEFAULT (CURRENT_DATE()),
+    cep CHAR(8),
+    FOREIGN KEY (codCidade) REFERENCES cidade(codCidade)                   
+);
+
+CREATE TABLE clienteFisico(
+	codCliente INT,
+    nome VARCHAR(50) NOT NULL,
+    dataNascimento DATE,
+    cpf CHAR(11) UNIQUE NOT NULL ,
+    rg CHAR(8),
+    FOREIGN KEY(codCliente) REFERENCES cliente(codCliente)
+);
+
+CREATE TABLE clienteJuridico(
+	codCliente INT,
+    nomeFantasia VARCHAR(80) UNIQUE,
+    razaoSocial VARCHAR(80) UNIQUE NOT NULL,
+    ie VARCHAR(20) UNIQUE NOT NULL,
+    cgc VARCHAR(20) UNIQUE NOT NULL,
+    FOREIGN KEY(codCliente)REFERENCES cliente(codCliente)
+);
+
+CREATE TABLE classe(
+	codClasse INT AUTO_INCREMENT PRIMARY KEY,
+    sigla VARCHAR(12),
+    nome VARCHAR(40) NOT NULL,
+    descricao VARCHAR(80)
+);
+
+CREATE TABLE produto(
+	codProduto INT AUTO_INCREMENT PRIMARY KEY,
+    descricao VARCHAR(40) NOT NULL,
+    unidadeMedia CHAR(2),
+    embalagem VARCHAR(15)DEFAULT('Fardo'),
+    codClasse INT,
+    precoVenda NUMERIC(14,2),
+    estoqueMaximo NUMERIC(14,2),
+    FOREIGN KEY (codClasse) REFERENCES classe(codClasse)
+
+);
+
+CREATE TABLE produtoLote(
+	codProduto INT,
+    numeroLote INT,
+    quantidadeAdquirida NUMERIC(14,2),
+    quantidadeVendida NUMERIC(14,2),
+    precoCusto NUMERIC(14,2),
+   	dataValidade DATE,
+    PRIMARY KEY(codProduto,numeroLote),
+    FOREIGN KEY (codProduto)REFERENCES produto(codProduto)
+);
+
+CREATE TABLE venda (
+	codVenda INT PRIMARY KEY AUTO_INCREMENT,
+    codCliente INT,
+    codVendedor INT,
+    dataVenda DATE DEFAULT (CURRENT_DATE),
+    enderecoEntrega VARCHAR(60),
+    situacao VARCHAR(30),
+    FOREIGN KEY (codCliente) REFERENCES cliente(codCliente),
+    FOREIGN KEY (codVendedor) REFERENCES vendedor(codVendedor)
+
+);
+
+CREATE TABLE itemVenda(
+	codVenda INT,
+    codProduto INT,
+    numeroLote INT,
+    quantidade NUMERIC(14,2)NOT NULL,
+    FOREIGN KEY (codVenda) REFERENCES venda(codVenda),
+    FOREIGN KEY (codProduto,numeroLote) REFERENCES produtoLote(codProduto,numeroLote)
+
+);
+
+CREATE TABLE fornecedor(
+	codFornecedor INT AUTO_INCREMENT PRIMARY KEY,
+    nomeFantasia VARCHAR(80) UNIQUE,
+    razaoSocial VARCHAR(80) UNIQUE NOT NULL,
+    ie VARCHAR(20) NOT NULL UNIQUE,
+    cgc VARCHAR(20) UNIQUE NOT NULL,
+    endereco VARCHAR(60),
+    telefone VARCHAR(20),
+    codCidade INT,
+    FOREIGN KEY(codCidade) REFERENCES cidade(codCidade)
+);
+
+CREATE TABLE pedido(
+	codPedido INT AUTO_INCREMENT PRIMARY KEY,
+    dataRealizacao DATE DEFAULT(CURRENT_DATE()),
+    dataEntrega DATE,
+    codFornecedor INT,
+    valor NUMERIC(20,2),
+    FOREIGN KEY (codFornecedor) REFERENCES fornecedor(codFornecedor)
+);
+
+CREATE TABLE itemPedido(
+	codPedido INT AUTO_INCREMENT PRIMARY KEY,
+    codProduto INT,
+    quantidade NUMERIC(14,2) NOT NULL,
+    FOREIGN KEY(codProduto) REFERENCES produto(codProduto)
+);
+
+
