@@ -1,14 +1,14 @@
-1) SELECT * FROM produto;
+1- SELECT * FROM produto;
 
-2) SELECT codFornecedor,nomeFantasia,endereco,telefone,codCidade FROM fornecedor;
+2- SELECT codFornecedor,nomeFantasia,endereco,telefone,codCidade FROM fornecedor;
 
-3) SELECT codVenda,dataVenda FROM venda WHERE status = "Despachada";
+3- SELECT codVenda,dataVenda FROM venda WHERE status = "Despachada";
 
-4) SELECT * FROM clienteJuridico;
+4- SELECT * FROM clienteJuridico;
 
-5) SELECT numeroLote FROM produtoLote WHERE dataValidade < CURRENT_DATE();
+5- SELECT numeroLote FROM produtoLote WHERE dataValidade < CURRENT_DATE();
 
-6) SELECT nome FROM departamento;
+6- SELECT nome FROM departamento;
 
 
 

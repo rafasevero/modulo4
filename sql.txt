@@ -285,3 +285,9 @@ JOIN
  - há três tipos mais utilizados de JOIN:
    - LEFT e RIGHT JOIN;
    - INNER JOIN;
+
+
+INNER JOIN: 
+  - O INNER JOIN vai resultar nas colunas que fazem relação entre as tabelas;
+  - podemos determinar qual coluna resgatar após a instrução SELECT;
+  - utilizamos a instrução ON para determinar as colunas que precisam ser iguais;   
