@@ -290,4 +290,102 @@ JOIN
 INNER JOIN: 
   - O INNER JOIN vai resultar nas colunas que fazem relação entre as tabelas;
   - podemos determinar qual coluna resgatar após a instrução SELECT;
-  - utilizamos a instrução ON para determinar as colunas que precisam ser iguais;   
+  - utilizamos a instrução ON para determinar as colunas que precisam ser iguais;  
+    - EX: SELECT colunas
+          FROM tabela1
+          INNER JOIN tabela2
+          ON tabela1.coluna_comum = tabela2.coluna_comum; 
+    - EX: SELECT clientes.nome, pedidos.data
+          FROM clientes
+          INNER JOIN pedidos
+          ON clientes.id = pedidos.cliente_id;    
+
+LEFT JOIN:
+
+ - vai retornar todos os dados da tabela da esquerda e os necessários da direita;
+ - também é chamado de LEFT OUTER JOIN;
+ - haverá dados retornados da tabela da esquerda mesmo se não corresponder com a outra;
+   - EX: SELECT clientes.nome, pedidos.id_pedido
+         FROM clientes         -- Tabela da esquerda
+         LEFT JOIN pedidos     -- Tabela da direita
+         ON clientes.id_cliente = pedidos.id_cliente;
+
+RIGHT JOIN:
+
+ - o RIGHT JOIN é semelhante ao LEFT, porém ele trás as colunas a mais da direita;
+ - chamado também de RIGHT OUTER JOIN;
+   - EX: SELECT clientes.nome, pedidos.id_pedido
+         FROM clientes          -- Tabela da esquerda
+         RIGHT JOIN pedidos     -- Tabela da direita
+         ON clientes.id_cliente = pedidos.id_cliente;
+
+
+JOIN COM + DE 2 TABELAS:
+
+ - EX: SELECT employees.first_name, salaries.salary,titles.title 
+       FROM employees 
+       INNER JOIN salaries 
+       ON employees.emp_no = salaries.emp_no 
+       INNER JOIN titles 
+       ON employees.emp_no = titles.emp_no;
+
+
+
+O QUE SÃO RELACIONAMENTOS?
+
+ - SQL é uma linguagem de banco de dados relacionais, ou seja, que possuem relações;
+ - estas relações servem para a separação de responsabilidades de tabelas, ex: cadastro, endereco, pedidos;
+ - há um link entre as tabelas, que são Foreign Keys(FKs);
+ - e há também vários tipos de relacionamentos:
+  - Um para um;
+  - Um para N;
+  - N para N;
+
+TIPOS DE RELACIONAMENTOS
+
+ - ONE TO ONE: quando uma tabela possui uma conexão com outra e vice-versa;
+   - EX: cada estudante pode ter apenas uma informação de contato e a informação de contato é apenas daquele estudante;
+ - ONE TO MANY: quando uma tabela possui diversos registro em outra, porém a segunda só pode possuir uma conexão;
+   - EX: um cliente pode ter diversos pedidos na loja, porém um pedido é de um único cliente;
+ - MANY TO MANY: quando duas tabelas podem ter conexões com diversos registros entre elas;
+   - EX: um aluno pode estar fazendo diversas matérias diferentes e uma matéria pode ter diversos alunos matriculados;
+
+
+
+SELECT *, estudante_materia.materia_id AS "QUÍMICA" FROM estudantes JOIN estudante_materia ON estudante_materia.estudante_id = estudantes.id AND estudante_materia.materia_id = 2;
+
+
+A IMPORTÂNCIA DO DB DESIGN:
+
+ - aplicações que tem o desenho do banco já iniciam com uma documentação;
+ - e ainda uma organização prévia, que dita as regras do sistema e como ele funciona;
+ - o relacionamento entre entidades também é previsto;
+ - erros podem ser resolvidos antes de acontecerem no código ou ainda antecipação de prooblemas da própria regra de negócios;
+
+  ANÁLISE DE REQUISITOS:
+   - é o planejamento e a definição do sistema;
+   - onde como o sistema deve funcionar é apresentado ou uma conversa com quem precisa do sistema é feita;
+   - com base nestes dados e descrições, planeja-se o banco de dados;
+   - há o ponto de contato com a parte técnica e não técnica;
+   - criam-se alternativas para possíveis problemas;
+
+  NORMALIZAÇÃO:
+   - é dividida em diversos níveis, algumas das premissas são:
+    - colocar chave primária na tabela;
+    - 1FN - colunas guardam um único valor(atomicidade);
+    - 2FN - colunas que não pertencem ao tópico central da tabela, devem virar uma outra tabela;
+    - 3FN - deixar no banco de dados apenas valores que não são dependentes de outros, devem ir p/outras camadas a responsabilidade; 
+
+  DIAGRAMA DE ENTIDADES RELACIONAIS:
+   - é um quadro onde se definem as tabelas e as relações entre si;
+   - deixando o banco de dados visual a todos da equipe;
+   - utilizado também para dar nome as tabelas e colunas;
+   - além de também os tipos de dados da mesma;
+   - com este diagrama pronto, o desenvolvimento da aplicação e o entendimento do projeto tornam-se mais rápidos;
+
+   
+
+
+
+
+

@@ -1,0 +1,61 @@
+1) SELECT vendedor.codVendedor,vendedor.nome AS nome_vendedor,vendedor.endereco,cidade.nome AS nome_cidade, estado.nome AS nome_estado
+   FROM vendedor
+   JOIN cidade 
+   ON vendedor.codCidade = cidade.codCidade
+   JOIN estado
+   ON cidade.siglaEstado = estado.siglaEstado;
+
+
+2) SELECT venda.codVenda, venda.dataVenda,vendedor.nome
+   FROM venda
+   JOIN vendedor
+   ON venda.codVendedor = vendedor.codVendedor
+   WHERE status = "Despachada" 
+   
+
+3) SELECT clienteFisico.nome, cliente.endereco 
+   FROM clienteFisico 
+   JOIN cliente 
+   ON clienteFisico.codCliente = cliente.codCliente 
+   WHERE cliente.endereco like "%Rua Marechal Floriano, 56%";
+
+4) SELECT clienteJuridico.* ,cliente.*
+   FROM clienteJuridico
+   JOIN cliente
+   ON clienteJuridico.codCliente = cliente.codCliente
+
+
+5) SELECT clienteJuridico.nomeFantasia,cliente.endereco,cliente.telefone,cidade.nome,cidade.siglaEstado
+   FROM clienteJuridico
+   JOIN cliente
+   ON clienteJuridico.codCliente = cliente.codCliente
+   JOIN cidade
+   ON cliente.codCidade = cidade.codCidade
+   WHERE cliente.dataCadastro = "1999-01-01" and cliente.dataCadastro >= "2003-06-30"
+
+
+6) SELECT vendedor.nome
+   FROM venda
+   JOIN vendedor 
+   ON venda.codVendedor = vendedor.codVendedor
+   JOIN clienteJuridico 
+   ON venda.codCliente = clienteJuridico.codCliente
+   WHERE clienteJuridico.nomeFantasia = 'Gelinski';
+
+
+7) SELECT produtoLote.codProduto,produtoLote.numeroLote,produto.descricao 
+   FROM produtoLote 
+   JOIN produto 
+   ON produtoLote.codProduto = produto.codProduto 
+   WHERE produtoLote.dataValidade <= CURRENT_DATE();   
+
+
+8) SELECT departamento.nome AS "Nome do Departamento",vendedor.nome AS "Nome do Vendedor"
+   FROM departamento
+   JOIN vendedor 
+   ON departamento.codDepartamento = vendedor.codDepartamento
+   
+   
+
+   
+   
