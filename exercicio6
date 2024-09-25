@@ -1,0 +1,49 @@
+1)SELECT pedido.codPedido,pedido.dataRealizacao,pedido.dataEntrega,fornecedor.nomeFantasia AS "nome fantasia do fornecedor"
+  FROM pedido
+  NATURAL JOIN fornecedor
+
+
+2) SELECT vendedor.nome,vendedor.dataNascimento,vendedor.codCidade
+   FROM vendedor, cidade
+   WHERE vendedor.codCidade = cidade.codCidade AND cidade.nome = 'Apucarana'
+
+
+3) SELECT venda.codVenda,venda.dataVenda,vendedor.nome,produtoLote.numeroLote,produto.descricao
+   FROM venda
+   NATURAL JOIN vendedor
+   NATURAL JOIN produtoLote
+   NATURAL JOIN produto
+   WHERE produto.descricao = 'Cal'
+
+4) SELECT classe.sigla,classe.nome,produto.codProduto,produto.descricao,produto.estoqueMinimo
+   FROM classe
+   JOIN produto
+   ON classe.codClasse = produto.codClasse
+   WHERE classe.nome = 'Acabamentos'
+
+
+5)  SELECT fornecedor.nomeFantasia,pedido.codPedido,pedido.dataRealizacao,pedido.dataEntrega
+    FROM fornecedor  
+    JOIN pedido
+    ON fornecedor.codFornecedor = pedido.codFornecedor
+    WHERE fornecedor.razaoSocial = 'Incepa';    
+
+
+6)  SELECT produto.codProduto,produto.descricao,itemVenda.codVenda
+    FROM produto
+    LEFT JOIN itemVenda
+    ON produto.codProduto = itemVenda.codProduto
+
+
+7)  SELECT fornecedor.nomeFantasia,pedido.codPedido,pedido.dataEntrega
+    FROM fornecedor
+    LEFT JOIN pedido
+    ON fornecedor.codFornecedor = pedido.codFornecedor    
+
+
+8) SELECT departamento.nome,departamento.localizacao,vendedor.nome,vendedor.dataNascimento
+   FROM vendedor
+   RIGHT JOIN departamento
+   ON departamento.codDepartamento = vendedor.codDepartamento
+
+   
